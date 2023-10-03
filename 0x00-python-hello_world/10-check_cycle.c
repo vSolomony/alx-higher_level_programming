@@ -1,4 +1,4 @@
-#include "shell.h"
+#include "lists.h"
 /**
  * check_cycle - to check for cycle
  * @list: structure singly linked list
