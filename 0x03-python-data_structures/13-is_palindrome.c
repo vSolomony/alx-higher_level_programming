@@ -1,68 +1,48 @@
 #include "lists.h"
-
-listint_t *reverse_listint(listint_t **head);
-int is_palindrome(listint_t **head);
-
 /**
- * reverse_listint - to reverse singly list
- * @head: the header of node start
- * Return: pointer to head of the node list
- */
-listint_t *reverse_listint(listint_t **head)
-{
-	listint_t *node = *head, *next, *prev = NULL;
-
-	while (node)
-	{
-		next = node->next;
-		node->next = prev;
-		prev = node;
-		node = next;
-	}
-
-	*head = prev;
-	return (*head);
-}
-/**
- * is_palindrome - check if it's palindrome
- * @head: A pointer to the head of the linked list
- * Return: if linked is not palindrome 0 if is 1
+ * is_palindrome - Checks if a singly linked list is a palindrome
+ * @head: Pointer to the head of the linked list
+ * Return: 1 if palindrome, 0 otherwise
  */
 int is_palindrome(listint_t **head)
 {
-	listint_t *tmp, *rev, *mid;
-	size_t size = 0, i;
+	listint_t *slow = *head, *fast = *head;
+	listint_t *prev = NULL, *current = *head, *next;
+	int is_palindrome = 1;
 
 	if (*head == NULL || (*head)->next == NULL)
 		return (1);
-
-	tmp = *head;
-	while (tmp)
+	while (fast != NULL && fast->next != NULL)
 	{
-		size++;
-		tmp = tmp->next;
+		slow = slow->next;
+		fast = fast->next->next;
 	}
-
-	tmp = *head;
-	for (i = 0; i < (size / 2) - 1; i++)
-		tmp = tmp->next;
-
-	if ((size % 2) == 0 && tmp->n != tmp->next->n)
-		return (0);
-
-	tmp = tmp->next->next;
-	rev = reverse_listint(&tmp);
-	mid = rev;
-
-	tmp = *head;
-	while (rev)
+	while (slow != NULL)
 	{
-		if (tmp->n != rev->n)
-			return (0);
-		tmp = tmp->next;
-		rev = rev->next;
+		next = slow->next;
+		slow->next = prev;
+		prev = slow;
+		slow = next;
 	}
-	reverse_listint(&mid);
+	while (prev != NULL)
+	{
+		if ((*head)->n != prev->n)
+		{
+			is_palindrome = 0;
+			break;
+		}
 
-	return (1);
+		*head = (*head)->next;
+		prev = prev->next;
+	}
+	slow = NULL;
+	while (current != NULL)
+	{
+		next = current->next;
+		current->next = slow;
+		slow = current;
+		current = next;
+	}
+	*head = slow;
+	return (is_palindrome);
 }
