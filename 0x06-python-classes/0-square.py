@@ -1,6 +1,8 @@
 #!/usr/bin/python3
-"""Square class identification"""
+"""Square class defination"""
+
 
 class Square:
-    """Square class in body"""
+    """Square class body"""
+
     pass
