@@ -30,30 +30,23 @@ class Square:
         self.__size = value
 
     def area(self):
-        """Get the area instance to comparators"""
         return self.__size * self.__size
 
     def __le__(self, other):
-		"""Get the area instance to comparators"""
         return self.area() <= other.area()
 
     def __lt__(self, other):
-		"""Get the area instance to comparators"""
         return self.area() < other.area()
 
     def __ge__(self, other):
-		"""Get the area instance to comparators"""
         return self.area() >= other.area()
 
     def __ne__(self, other):
-		"""Get the area instance to comparators"""
         return self.area() != other.area()
 
     def __gt__(self, other):
-		"""Get the area instance to comparators"""
         return self.area() > other.area()
 
     def __eq__(self, other):
-		"""Get the area instance to comparators"""
         return self.area() == other.area()
 
