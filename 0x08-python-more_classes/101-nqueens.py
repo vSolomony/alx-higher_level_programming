@@ -8,31 +8,30 @@ def init_board(n):
     """Initialize an `n`x`n` sized chessboard with 0's."""
     board = []
     [board.append([]) for i in range(n)]
-    [row.append(' ') for i in range(n) for row in board]
-    return (board)
+    [row.append(" ") for i in range(n) for row in board]
+    return board
 
 
 def board_deepcopy(board):
     """Return a deepcopy of a chessboard."""
     if isinstance(board, list):
         return list(map(board_deepcopy, board))
-    return (board)
+    return board
 
 
 def get_solution(board):
-    """Return the list of lists representation in a board."""
+    """Return the list of lists representation of a board."""
     solution = []
     for r in range(len(board)):
         for c in range(len(board)):
             if board[r][c] == "Q":
                 solution.append([r, c])
                 break
-    return (solution)
+    return solution
 
 
 def xout(board, row, col):
-    """X spots on a chessboard.
-    """
+    """X spots on a chessboard."""
     # X out all forward spots
     for c in range(col + 1, len(board)):
         board[row][c] = "x"
@@ -57,7 +56,7 @@ def xout(board, row, col):
     for r in range(row - 1, -1, -1):
         if c < 0:
             break
-        board[r][c]
+        board[r][c] = "x"
         c -= 1
     # X out all spots diagonally up to the right
     c = col + 1
@@ -76,21 +75,19 @@ def xout(board, row, col):
 
 
 def recursive_solve(board, row, queens, solutions):
-    """Recursively solve an N-queens puzzle.
-    """
+    """Recursively solve an N-queens puzzle."""
     if queens == len(board):
         solutions.append(get_solution(board))
-        return (solutions)
+        return solutions
 
     for c in range(len(board)):
         if board[row][c] == " ":
             tmp_board = board_deepcopy(board)
             tmp_board[row][c] = "Q"
             xout(tmp_board, row, c)
-            solutions = recursive_solve(tmp_board, row + 1,
-                                        queens + 1, solutions)
+            solutions = recursive_solve(tmp_board, row + 1, queens + 1, solutions)
 
-    return (solutions)
+    return solutions
 
 
 if __name__ == "__main__":
