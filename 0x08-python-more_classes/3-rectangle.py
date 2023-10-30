@@ -1,32 +1,28 @@
 #!/usr/bin/python3
-"""Module 4-rectangle"""
-
+"""
+Defines a Rectangle class.
+"""
 
 class Rectangle:
-    """Define a rectangle class"""
+    """Rectangle class body. """
 
     def __init__(self, width=0, height=0):
-        """Initializes a Rectangle props in a contructor.
+        """Initializes a Rectangle props in constructor.
         """
         self.width = width
         self.height = height
 
     def __str__(self):
-        """Returns an informal string representation of rectangle
+        """Returns an informal string representation
         """
-        if self.__height == 0 or self.__width == 0:
+        if self.height == 0 or self.width == 0:
             return ''
-        rectangle_str = ''
-        for i in range(self.__height):
-            for j in range(self.__width):
-                rectangle_str += '#'
-            rectangle_str += '\n'
-        return rectangle_str[:-1]
-
-    def __repr__(self):
-        """Return internal string representation of a Rectangle
-        """
-        return "Rectangle({}, {})".format(self.__width, self.__height)
+        record_str = ''
+        for i in range(self.height):
+            for j in range(self.width):
+                record_str += '#'
+            record_str += '\n'
+        return record_str[:-1]
 
     @property
     def width(self):
@@ -58,14 +54,17 @@ class Rectangle:
             raise ValueError("height must be >= 0")
         self.__height = value
 
+    @property
     def area(self):
         """Calculates the area of a Rectangle instance
         """
-        return self.__width * self.__height
+        return self.width * self.height
 
+    @property
     def perimeter(self):
-        """Calculates the perimeter of a Rectangle instance
+        """Calculates and returns the perimeter of a Rectangle
         """
-        if self.__height == 0 or self.__width == 0:
+        if self.height == 0 or self.width == 0:
             return 0
-        return 2 * (self.__width + self.__height)
+        return 2 * (self.width + self.height)
+
