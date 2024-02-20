@@ -27,4 +27,3 @@ request.get(url, (error, response, body) => {
     charactersUrls.forEach(getCharacterDetails);
   }
 });
-
