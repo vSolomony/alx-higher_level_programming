@@ -8,22 +8,31 @@ request.get(url, (error, response, body) => {
   if (error) {
     console.log(error);
   } else {
-    const filmData = JSON.parse(body);
-    const charactersUrls = filmData.characters;
+    try {
+      const filmData = JSON.parse(body);
+      const charactersUrls = filmData.characters;
 
-    // Function to get character details
-    const getCharacterDetails = (characterUrl) => {
-      request.get(characterUrl, (error, response, body) => {
-        if (error) {
-          console.log(error);
-        } else {
-          const characterData = JSON.parse(body);
-          console.log(characterData.name);
-        }
-      });
-    };
+      // Function to get character details
+      const getCharacterDetails = (characterUrl) => {
+        request.get(characterUrl, (error, response, body) => {
+          if (error) {
+            console.log(error);
+          } else {
+            try {
+              const characterData = JSON.parse(body);
+              console.log(characterData.name);
+            } catch (characterError) {
+              console.log(characterError);
+            }
+          }
+        });
+      };
 
-    // Iterate through characters and get details
-    charactersUrls.forEach(getCharacterDetails);
+      // Iterate through characters and get details
+      charactersUrls.forEach(getCharacterDetails);
+
+    } catch (parseError) {
+      console.log(parseError);
+    }
   }
 });
